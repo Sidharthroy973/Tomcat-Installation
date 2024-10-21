@@ -1,0 +1,17 @@
+sudo apt update
+sudo apt install openjdk-17-jdk -y
+java -version
+useradd -m -U -d /opt/tomcat -s /bin/false tomcat
+cd /tmp
+wget https://downloads.apache.org/tomcat/tomcat-10/v10.1.31/bin/apache-tomcat-10.1.31.tar.gz -P /tmp
+sudo mkdir -p /opt/tomcat
+sudo tar -xzf /tmp/apache-tomcat-10.1.31.tar.gz -C /opt/tomcat --strip-components=1
+chown -R tomcat: /opt/tomcat
+chmod -R u+x /opt/tomcat/bin
+sudo vi /etc/systemd/system/tomcat.service
+cat /etc/systemd/system/tomcat.service
+systemctl daemon-reload
+systemctl start tomcat
+systemctl enable tomcat
+ufw allow 8080
+ufw reload
