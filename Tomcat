@@ -33,3 +33,6 @@ systemctl start tomcat
 systemctl enable tomcat
 ufw allow 8080
 ufw reload
+cd /opt/tomcat/webapps/host-manager# vi META-INF
+Write allow all
+allow *
