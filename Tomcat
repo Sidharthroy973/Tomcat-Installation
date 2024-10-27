@@ -11,6 +11,22 @@ sudo tar -xzf /tmp/apache-tomcat-10.1.31.tar.gz -C /opt/tomcat --strip-component
 chown -R tomcat: /opt/tomcat
 chmod -R u+x /opt/tomcat/bin
 sudo vi /etc/systemd/system/tomcat.service
+
+[Unit]
+Description=Tomcat Server
+After=network.target
+
+[Service]
+Type=forking
+User=tomcat
+Group=tomcat
+Environment="JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64"
+WorkingDirectory=/opt/tomcat/
+ExecStart=/opt/tomcat/bin/startup.sh
+
+[Install]
+WantedBy=multi-user.target
+
 cat /etc/systemd/system/tomcat.service
 systemctl daemon-reload
 systemctl start tomcat
