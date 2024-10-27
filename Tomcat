@@ -33,6 +33,20 @@ systemctl start tomcat
 systemctl enable tomcat
 ufw allow 8080
 ufw reload
-cd /opt/tomcat/webapps/host-manager# vi META-INF
+/opt/tomcat/webapps/manager/META-INF# vi context.xml
 Write allow all
-allow *
+allow .*
+
+cd /opt/tomcat/conf# vi  tomcat-users.xml
+
+    <role rolename="manager-gui"/>
+    <role rolename="manager-script"/>
+    <role rolename="admin-gui" />
+    <user username="tomcat" password="tomcat" roles="manager-gui" />
+    <user username="admin" password="Bittukumar143m@" roles="manager-gui,admin-gui,manager-script"/>
+</tomcat-users>
+
+systemctl restart tomcat
+
+
+
